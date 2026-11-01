@@ -13,15 +13,58 @@ const socialLinks = [
     icon: "linkedin"
   }
 ];
+
+const contactLinks = [
+  { label: "Teléfono", value: "+34 622 668 660", href: "tel:+34622668660" },
+  { label: "Gmail", value: "esotsaldev@gmail.com", href: "mailto:esotsaldev@gmail.com" },
+  { label: "WhatsApp", value: "Escríbeme", href: "https://wa.me/34622668660" }
+];
 ---
 
 <footer class="border-t border-white/10 bg-slate-950/80">
-  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-6 py-7 sm:flex-row lg:px-8">
-    <p class="text-center text-sm text-slate-400 sm:text-left">
-      © {currentYear} Esteban Soto Salguero. Todos los derechos reservados.
-    </p>
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-7 lg:px-8">
+    <div class="footer-section footer-copyright">
+      <p class="text-center text-sm text-slate-400">
+        © {currentYear} Esteban Soto Salguero. Todos los derechos reservados.
+      </p>
+    </div>
 
-    <nav aria-label="Redes sociales">
+    <nav class="footer-section" aria-label="Contacto">
+      <ul class="flex flex-wrap justify-center gap-3">
+        {contactLinks.map((contact) => (
+          <li>
+            <a
+              href={contact.href}
+              target={contact.href.startsWith("http") ? "_blank" : undefined}
+              rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/50 hover:bg-cyan-300/10 hover:text-cyan-200 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+              aria-label={`${contact.label}: ${contact.value}`}
+              title={contact.label}
+            >
+              {contact.label === "Teléfono" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-current">
+                  <path d="M6.62 10.79a15.46 15.46 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2Z" />
+                </svg>
+              )}
+              {contact.label === "Gmail" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-none stroke-current stroke-2">
+                  <path d="M3 6.5 12 13l9-6.5" />
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                </svg>
+              )}
+              {contact.label === "WhatsApp" && (
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="h-4 w-4 fill-none stroke-current stroke-2">
+                  <path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4.1A8 8 0 1 1 20 11.5Z" />
+                  <path d="M8.5 8.5c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4-.1.6l-.5.6c.6 1.1 1.5 2 2.6 2.6l.6-.5c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.5v.5c0 .3 0 .5-.4.7-.4.2-1 .3-1.6.1-1.1-.3-2.4-1-3.6-2.2s-1.9-2.5-2.2-3.6c-.2-.6-.1-1.2.1-1.5Z" />
+                </svg>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <nav class="footer-section" aria-label="Redes sociales">
       <ul class="flex items-center gap-3">
         {socialLinks.map((link) => (
           <li>
@@ -50,3 +93,20 @@ const socialLinks = [
     </nav>
   </div>
 </footer>
+
+<style>
+  .footer-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.5rem;
+  }
+
+  @media (max-width: 640px) {
+    footer > div {
+      flex-direction: column-reverse;
+      justify-content: center;
+    }
+  }
+
+</style>
