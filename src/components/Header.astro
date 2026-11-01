@@ -56,17 +56,37 @@ const contactLinks = [
             )}
           </li>
         ))}
+        <li>
+          <a
+            href="/cv.pdf"
+            download
+            class="cv-link inline-flex h-10 w-10 items-center justify-center rounded-lg border border-cyan-300/40 bg-cyan-300/10 text-xs font-bold tracking-widest text-cyan-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-200 hover:bg-cyan-300/20 hover:shadow-lg hover:shadow-cyan-500/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+            aria-label="Descargar CV"
+          >
+            CV
+          </a>
+        </li>
       </ul>
 
-      <button
-        type="button"
-        class="menu-toggle group relative z-10 h-11 w-11 rounded-full border border-white/10 bg-white/5 transition-colors hover:border-cyan-300/50 hover:bg-cyan-300/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:hidden"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="mobile-navigation"
-      >
-        <span class="menu-bar" aria-hidden="true"></span>
-      </button>
+      <div class="flex items-center gap-3 md:hidden">
+        <a
+          href="/cv.pdf"
+          download
+          class="cv-link inline-flex h-10 w-10 items-center justify-center rounded-lg border border-cyan-300/40 bg-cyan-300/10 text-xs font-bold tracking-widest text-cyan-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-200 hover:bg-cyan-300/20 hover:shadow-lg hover:shadow-cyan-500/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
+          aria-label="Descargar CV"
+        >
+          CV
+        </a>
+        <button
+          type="button"
+          class="menu-toggle group relative z-10 h-11 w-11 rounded-full border border-white/10 bg-white/5 transition-colors hover:border-cyan-300/50 hover:bg-cyan-300/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="mobile-navigation"
+        >
+          <span class="menu-bar" aria-hidden="true"></span>
+        </button>
+      </div>
     </nav>
   </div>
 
