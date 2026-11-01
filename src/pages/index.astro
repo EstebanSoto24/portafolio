@@ -1,11 +1,408 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const projects = [
+  {
+    title: "Página de restaurante",
+    description: "Sitio web responsive para un restaurante.",
+    url: "https://github.com/usuario/restaurante"
+  },
+  {
+    title: "Panel administrativo",
+    description: "Dashboard para gestionar clientes.",
+    url: "https://github.com/usuario/dashboard"
+  }
+];
+
+const studies = [
+  {
+    title: "Administración de sistemas",
+    description: "Bases de sistemas operativos, redes, servicios y mantenimiento de infraestructuras.",
+    period: "Formación técnica"
+  },
+  {
+    title: "Cloud y DevOps",
+    description: "Práctica con contenedores, automatización, integración continua y despliegues reproducibles.",
+    period: "Aprendizaje continuo"
+  }
+];
+
+const technologyGroups = [
+  {
+    name: "Contenedores y cloud",
+    technologies: [
+      { name: "Docker", icon: "docker", color: "text-sky-300 border-sky-400/30 bg-sky-400/10" },
+      { name: "Kubernetes", icon: "kubernetes", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" },
+      { name: "Traefik", icon: "traefikmesh", color: "text-cyan-300 border-cyan-400/30 bg-cyan-400/10" },
+      { name: "Proxmox", icon: "proxmox", color: "text-orange-300 border-orange-400/30 bg-orange-400/10" },
+      { name: "Cloudflare", icon: "cloudflare", color: "text-orange-300 border-orange-400/30 bg-orange-400/10" }
+    ]
+  },
+  {
+    name: "Desarrollo y automatización",
+    technologies: [
+      { name: "CI/CD", icon: "githubactions", color: "text-violet-300 border-violet-400/30 bg-violet-400/10" },
+      { name: "GitHub", icon: "github", color: "text-slate-200 border-slate-400/30 bg-slate-400/10" },
+      { name: "Git", icon: "git", color: "text-orange-300 border-orange-400/30 bg-orange-400/10" },
+      { name: "n8n", icon: "n8n", color: "text-rose-300 border-rose-400/30 bg-rose-400/10" },
+      { name: "Bash", icon: "gnubash", color: "text-emerald-300 border-emerald-400/30 bg-emerald-400/10" },
+      { name: "JSON", icon: "json", color: "text-yellow-300 border-yellow-400/30 bg-yellow-400/10" },
+      { name: "JavaScript", icon: "javascript", color: "text-yellow-300 border-yellow-400/30 bg-yellow-400/10" },
+      { name: "Python", icon: "python", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" },
+      { name: "PHP", icon: "php", color: "text-indigo-300 border-indigo-400/30 bg-indigo-400/10" },
+      { name: "SQL", icon: "postgresql", color: "text-sky-300 border-sky-400/30 bg-sky-400/10" }
+    ]
+  },
+  {
+    name: "Web",
+    technologies: [
+      { name: "HTML", icon: "html5", color: "text-orange-300 border-orange-400/30 bg-orange-400/10" },
+      { name: "CSS", icon: "css3", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" },
+      { name: "Astro", icon: "astro", color: "text-fuchsia-300 border-fuchsia-400/30 bg-fuchsia-400/10" },
+      { name: "Tailwind CSS", icon: "tailwindcss", color: "text-cyan-300 border-cyan-400/30 bg-cyan-400/10" },
+      { name: "WordPress", icon: "wordpress", color: "text-sky-300 border-sky-400/30 bg-sky-400/10" },
+    ]
+  },
+  {
+    name: "Redes y seguridad",
+    technologies: [
+      { name: "VPN", icon: "openvpn", color: "text-green-300 border-green-400/30 bg-green-400/10" },
+      { name: "GPG", icon: "gnuprivacyguard", color: "text-slate-200 border-slate-400/30 bg-slate-400/10" },
+      { name: "Cisco", icon: "cisco", color: "text-cyan-300 border-cyan-400/30 bg-cyan-400/10" },
+      { name: "iptables", icon: "linux", color: "text-red-300 border-red-400/30 bg-red-400/10" },
+      { name: "SSH", icon: "gnubash", color: "text-slate-200 border-slate-400/30 bg-slate-400/10" },
+      { name: "DNS", icon: "cloudflare", color: "text-orange-300 border-orange-400/30 bg-orange-400/10" },
+      { name: "DHCP", icon: "cloudflare", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" }
+    ]
+  },
+  {
+    name: "Sistemas y servicios",
+    technologies: [
+      { name: "Debian", icon: "debian", color: "text-red-300 border-red-400/30 bg-red-400/10" },
+      { name: "Arch Linux", icon: "archlinux", color: "text-sky-300 border-sky-400/30 bg-sky-400/10" },
+      { name: "Windows Server", icon: "windows11", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" },
+      { name: "ZFS", icon: "openzfs", color: "text-indigo-300 border-indigo-400/30 bg-indigo-400/10" },
+      { name: "Nginx", icon: "nginx", color: "text-green-300 border-green-400/30 bg-green-400/10" },
+      { name: "Apache", icon: "apache", color: "text-red-300 border-red-400/30 bg-red-400/10" },
+      { name: "Nextcloud", icon: "nextcloud", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" },
+      { name: "LDAP", icon: "microsoft", color: "text-orange-300 border-orange-400/30 bg-orange-400/10" },
+      { name: "SMB", icon: "linux", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" },
+      { name: "Active Directory", icon: "microsoft", color: "text-blue-300 border-blue-400/30 bg-blue-400/10" }
+    ]
+  }
+];
+
+const certifications = [
+  {
+    title: "Curso básico n8n",
+    issuer: "INDESS",
+    status: "Completada",
+    progress: 100,
+    pdf: "/certifications/curso-basico-n8n-indess.pdf"
+  },
+  {
+    title: "AWS Solutions Architect",
+    issuer: "AWS",
+    status: "En progreso",
+    progress: 70,
+    pdf: "/certifications/aws-solutions-architect.pdf"
+  },
+  {
+    title: "GitHub Foundations",
+    issuer: "GitHub",
+    status: "En progreso",
+    progress: 80,
+    pdf: "/certifications/github-foundations.pdf"
+  },
+  {
+    title: "Certified Kubernetes Administrator",
+    issuer: "CNCF / Kubernetes",
+    status: "Planificada",
+    progress: 0,
+    pdf: "/certifications/cka.pdf"
+  }
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Esteban Soto Salguero | SysAdmin y DevOps">
+  <main>
+    <section id="inicio" class="relative overflow-hidden border-b border-white/10 px-6 py-28 text-center sm:py-36">
+      <div class="pointer-events-none absolute left-1/2 top-1/2 h-72 w-[min(90%,_58rem)] -translate-x-1/2 -translate-y-1/2 rounded-[45%] bg-cyan-400/10 blur-3xl"></div>
+      <div class="relative mx-auto max-w-3xl">
+        <p class="text-sm font-medium uppercase tracking-[0.3em] text-cyan-300">Hola, soy</p>
+        <h1 class="mt-5 whitespace-nowrap text-[clamp(1.65rem,8vw,4.5rem)] font-bold tracking-[-0.04em] text-white">
+          Esteban Soto Salguero<span class="text-cyan-300">.</span>
+        </h1>
+        <p class="mt-5 text-lg text-slate-300 sm:text-xl">
+          <span class="text-slate-400">Soy </span>
+          <span class="inline-flex items-baseline text-left font-medium text-cyan-300" aria-live="polite">
+            <span id="profession">Junior SysAdmin</span><span class="cursor-blink ml-0.5" aria-hidden="true">|</span>
+          </span>
+        </p>
+        <p class="mx-auto mt-6 max-w-xl leading-7 text-slate-400">
+          Me preparo para impulsar infraestructuras fiables, automatizar procesos y facilitar despliegues
+          seguros como Junior SysAdmin o Junior DevOps.
+        </p>
+      </div>
+    </section>
+
+    <section id="sobre-mi" class="border-b border-white/10 px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Conóceme</p>
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Sobre mí</h2>
+        <div class="mt-8 max-w-4xl space-y-5 text-base leading-8 text-slate-400">
+          <p>
+            Soy Esteban Soto Salguero, una persona curiosa y orientada a la resolución de problemas,
+            con especial interés por la administración de sistemas, la automatización y las prácticas
+            DevOps. Me gusta entender cómo funcionan las cosas desde la base, documentar cada proceso
+            y convertir tareas repetitivas en flujos claros, seguros y fáciles de mantener.
+          </p>
+          <p>
+            En mi aprendizaje combino la perspectiva de sistemas con la del desarrollo web: trabajo con
+            Linux, redes, contenedores, control de versiones y herramientas de despliegue, sin perder de
+            vista la experiencia de las personas que utilizarán cada solución. Busco seguir creciendo en
+            entornos donde pueda aportar responsabilidad, atención al detalle y ganas de aprender.
+          </p>
+          <p>
+            Mi objetivo es construir infraestructuras estables y automatizadas, anticiparme a los
+            problemas y colaborar para que los proyectos lleguen a producción de una manera reproducible,
+            observable y sostenible.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="formacion" class="border-b border-white/10 bg-white/[0.02] px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Trayectoria</p>
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Formación</h2>
+        <div class="mt-8 grid gap-8 md:grid-cols-2">
+          {studies.map((study) => (
+            <article class="tilt-card group relative rounded-2xl border border-white/10 bg-slate-950/60 p-6" data-tilt>
+              <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+              <div class="relative">
+                <p class="text-xs font-medium uppercase tracking-[0.2em] text-cyan-300">{study.period}</p>
+                <h3 class="mt-3 text-xl font-semibold">{study.title}</h3>
+                <p class="mt-3 leading-7 text-slate-400">{study.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Trabajo seleccionado</p>
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Mis proyectos</h2>
+        <div class="mt-8 grid gap-8 md:grid-cols-2">
+          {projects.map((project) => (
+            <article class="tilt-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6" data-tilt>
+              <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+              <div class="relative">
+                <h3 class="text-xl font-semibold">{project.title}</h3>
+                <p class="mt-3 leading-7 text-slate-400">{project.description}</p>
+                <a href={project.url} class="mt-5 inline-block text-cyan-300 transition-colors hover:text-cyan-200">
+                  Ver proyecto <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="tecnologias" class="border-t border-white/10 bg-white/[0.02] px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Herramientas</p>
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Tecnologías</h2>
+        <div class="mt-10 space-y-10">
+          {technologyGroups.map((group) => (
+            <div>
+              <h3 class="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-slate-400">{group.name}</h3>
+              <div class="flex flex-wrap gap-3">
+                {group.technologies.map((technology) => (
+                  <span class={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${technology.color}`}>
+                    <span
+                      aria-hidden="true"
+                      class="technology-icon h-5 w-5 shrink-0 bg-current"
+                      style={`--icon-url: url(https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/${technology.icon}.svg)`}
+                    ></span>
+                    {technology.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="border-t border-white/10 px-6 py-20">
+      <div class="mx-auto max-w-6xl">
+        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Próximos objetivos</p>
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Roadmap y Certificaciones</h2>
+        <p class="mt-4 max-w-2xl leading-7 text-slate-400">
+          Un recorrido vivo de las certificaciones que ya he completado y de los próximos objetivos
+          que estoy preparando.
+        </p>
+
+        <div class="mt-10 grid gap-8 md:grid-cols-2">
+          {certifications.map((certification) => (
+            <article
+              class:list={[
+                "tilt-card group relative rounded-2xl border p-6",
+                certification.progress === 100
+                  ? "border-emerald-400/30 bg-emerald-400/[0.04]"
+                  : "border-white/10 bg-white/[0.03]"
+              ]}
+              data-tilt
+            >
+              <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+              <div class="relative">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-xs font-medium uppercase tracking-[0.2em] text-cyan-300">{certification.issuer}</p>
+                    <h3 class="mt-3 text-xl font-semibold">{certification.title}</h3>
+                  </div>
+                  <span
+                    class:list={[
+                      "shrink-0 rounded-full border px-3 py-1 text-xs font-medium",
+                      certification.progress === 100
+                        ? "border-emerald-400/30 bg-emerald-400/10 text-emerald-300"
+                        : certification.progress === 0
+                          ? "border-slate-400/20 bg-slate-400/10 text-slate-400"
+                          : "border-amber-400/30 bg-amber-400/10 text-amber-300"
+                    ]}
+                  >
+                    {certification.status}
+                  </span>
+                </div>
+
+                <div class="mt-7">
+                  <div class="mb-2 flex items-center justify-between text-xs text-slate-400">
+                    <span>Progreso</span>
+                    <span class="font-semibold text-slate-200">{certification.progress}%</span>
+                  </div>
+                  <div
+                    class="h-2 overflow-hidden rounded-full bg-slate-800"
+                    role="progressbar"
+                    aria-label={`Progreso de ${certification.title}`}
+                    aria-valuenow={certification.progress}
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    <div
+                      class:list={[
+                        "h-full rounded-full transition-all duration-700",
+                        certification.progress === 100
+                          ? "bg-emerald-400"
+                          : "bg-cyan-400"
+                      ]}
+                      style={`width: ${certification.progress}%`}
+                    ></div>
+                  </div>
+                </div>
+
+                <a
+                  href={certification.pdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-200"
+                >
+                  Ver certificación PDF <span class="ml-2" aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<script>
+  const professionElement = document.querySelector<HTMLElement>("#profession");
+  const professions = ["Junior SysAdmin", "Junior DevOps"];
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (professionElement && !reducedMotion) {
+    let professionIndex = 0;
+    let characterIndex = professionElement.textContent?.length ?? 0;
+    let deleting = true;
+    const animateProfession = () => {
+      const currentProfession = professions[professionIndex];
+      professionElement.textContent = currentProfession.slice(0, characterIndex);
+      if (deleting) {
+        characterIndex -= 1;
+        if (characterIndex < 0) {
+          deleting = false;
+          professionIndex = (professionIndex + 1) % professions.length;
+          characterIndex = 0;
+        }
+      } else {
+        characterIndex += 1;
+        if (characterIndex > currentProfession.length) {
+          deleting = true;
+          window.setTimeout(animateProfession, 2200);
+          return;
+        }
+      }
+      window.setTimeout(animateProfession, deleting ? 120 : 180);
+    };
+    window.setTimeout(animateProfession, 2200);
+  }
+
+  if (!reducedMotion) {
+    document.querySelectorAll<HTMLElement>("[data-tilt]").forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const bounds = card.getBoundingClientRect();
+        const rotateX = ((event.clientY - bounds.top) / bounds.height - 0.5) * -6;
+        const rotateY = ((event.clientX - bounds.left) / bounds.width - 0.5) * 6;
+        card.style.setProperty("--rotate-x", `${rotateX}deg`);
+        card.style.setProperty("--rotate-y", `${rotateY}deg`);
+        card.style.setProperty("--shine-x", `${event.clientX - bounds.left}px`);
+        card.style.setProperty("--shine-y", `${event.clientY - bounds.top}px`);
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.setProperty("--rotate-x", "0deg");
+        card.style.setProperty("--rotate-y", "0deg");
+      });
+    });
+  }
+</script>
+
+<style>
+  .tilt-card {
+    transform: perspective(900px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+    transform-style: preserve-3d;
+    transition: transform 180ms ease, border-color 300ms ease, background-color 300ms ease;
+  }
+
+  .tilt-card:hover {
+    border-color: rgb(103 232 249 / 0.35);
+  }
+
+  .tilt-shine {
+    background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgb(103 232 249 / 0.16), transparent 35%);
+  }
+
+  .technology-icon {
+    display: inline-block;
+    mask: var(--icon-url) center / contain no-repeat;
+    -webkit-mask: var(--icon-url) center / contain no-repeat;
+  }
+
+  .cursor-blink {
+    animation: blink 0.9s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tilt-card { transform: none; transition: none; }
+    .cursor-blink { animation: none; }
+  }
+</style>
