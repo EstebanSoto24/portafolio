@@ -1,0 +1,257 @@
+---
+const navItems = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Sobre mí", href: "#sobre-mi" },
+  { label: "Formación", href: "#formacion" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Tecnologías", href: "#tecnologias" },
+  { label: "Roadmap", href: "#roadmap" },
+  { label: "Contacto", href: "#contacto" }
+];
+
+const contactLinks = [
+  { label: "Teléfono", value: "+34 600 000 000", href: "tel:+34600000000" },
+  { label: "Gmail", value: "hola@tudominio.com", href: "mailto:hola@tudominio.com" },
+  { label: "WhatsApp", value: "Escríbeme", href: "https://wa.me/34600000000" }
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
+    <a
+      href="#inicio"
+      class="text-sm font-semibold tracking-[0.2em] text-slate-100 transition-colors hover:text-cyan-300"
+      aria-label="Ir al inicio"
+    >
+      ESTEBAN SOTO<span class="text-cyan-300">.</span>
+    </a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="hidden items-center gap-8 md:flex">
+        {navItems.map((item) => (
+          <li>
+            {item.label === "Contacto" ? (
+              <div class="contact-menu relative">
+                <button
+                  type="button"
+                  class="contact-toggle nav-link relative py-2 text-sm text-slate-300 transition-colors duration-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300"
+                  aria-expanded="false"
+                  aria-controls="contact-popover"
+                >
+                  Contacto
+                </button>
+                <div id="contact-popover" class="contact-popover invisible absolute right-0 top-10 w-72 translate-y-2 rounded-3xl border border-white/15 bg-slate-900/90 p-3 opacity-0 shadow-2xl shadow-cyan-950/40 backdrop-blur-2xl transition-all duration-300">
+                  {contactLinks.map((contact) => (
+                    <a href={contact.href} class="contact-link flex items-center justify-between rounded-2xl px-4 py-3 text-sm transition-colors hover:bg-cyan-300/10" target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                      <span class="text-slate-300">{contact.label}</span>
+                      <span class="text-xs text-cyan-300">{contact.value}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a href={item.href} class="nav-link relative py-2 text-sm text-slate-300 transition-colors duration-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300">
+                {item.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+
+      <button
+        type="button"
+        class="menu-toggle group relative z-10 h-11 w-11 rounded-full border border-white/10 bg-white/5 transition-colors hover:border-cyan-300/50 hover:bg-cyan-300/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 md:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-navigation"
+      >
+        <span class="menu-bar" aria-hidden="true"></span>
+      </button>
+    </nav>
+  </div>
+
+  <div
+    id="mobile-navigation"
+    class="mobile-navigation grid grid-rows-[0fr] px-5 opacity-0 transition-[grid-template-rows,opacity,padding] duration-300 ease-out md:hidden"
+  >
+    <div class="overflow-hidden">
+      <ul class="mobile-menu-list space-y-2 rounded-[1.75rem] border border-white/15 bg-slate-900/70 p-3 shadow-2xl shadow-cyan-950/30 backdrop-blur-2xl">
+        {navItems.map((item) => (
+          <li>
+            {item.label === "Contacto" ? (
+              <div class="mobile-contact rounded-2xl border border-transparent bg-white/[0.04] p-1 transition-colors hover:border-cyan-300/30">
+                <button type="button" class="mobile-contact-toggle flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm text-slate-300 focus-visible:outline-2 focus-visible:outline-cyan-300" aria-expanded="false" aria-controls="mobile-contact-links">
+                  Contacto <span class="text-cyan-300" aria-hidden="true">+</span>
+                </button>
+                <div id="mobile-contact-links" class="mobile-contact-links grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300">
+                  <div class="overflow-hidden">
+                    <div class="space-y-1 border-t border-white/10 px-2 pb-1 pt-2">
+                      {contactLinks.map((contact) => (
+                        <a href={contact.href} class="mobile-link block rounded-xl px-3 py-2 text-xs text-slate-400 transition-colors hover:bg-cyan-300/10 hover:text-white" target={contact.href.startsWith("http") ? "_blank" : undefined} rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}>
+                          <span class="mr-2 text-cyan-300">{contact.label}</span>{contact.value}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <a href={item.href} class="mobile-link flex items-center rounded-2xl border border-transparent bg-white/[0.04] px-4 py-3.5 text-sm text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300/30 hover:bg-cyan-300/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300">
+                {item.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background-image: radial-gradient(circle, rgb(103 232 249) 1.2px, transparent 1.3px);
+    background-position: center;
+    background-size: 7px 4px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition:
+      opacity 300ms ease,
+      transform 300ms ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-navigation.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    padding-top: 0.65rem;
+    padding-bottom: 0.9rem;
+  }
+
+  .menu-bar,
+  .menu-bar::before,
+  .menu-bar::after {
+    position: absolute;
+    left: 50%;
+    display: block;
+    width: 1.25rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: rgb(226 232 240);
+    transform: translateX(-50%);
+    transition: transform 300ms ease, opacity 300ms ease;
+  }
+
+  .menu-bar {
+    background: transparent;
+  }
+
+  .menu-bar::before,
+  .menu-bar::after {
+    content: "";
+  }
+
+  .menu-bar::before {
+    transform: translate(-50%, -5px);
+  }
+
+  .menu-bar::after {
+    transform: translate(-50%, 5px);
+  }
+
+  .menu-toggle.is-open .menu-bar::before {
+    transform: translate(-50%, 0) rotate(45deg);
+  }
+
+  .menu-toggle.is-open .menu-bar::after {
+    transform: translate(-50%, 0) rotate(-45deg);
+  }
+
+  .contact-popover.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mobile-contact-links.is-open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const menuButton = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const mobileNavigation = document.querySelector<HTMLElement>("#mobile-navigation");
+  const mobileLinks = document.querySelectorAll<HTMLAnchorElement>(".mobile-link");
+  const contactToggle = document.querySelector<HTMLButtonElement>(".contact-toggle");
+  const contactPopover = document.querySelector<HTMLElement>("#contact-popover");
+  const mobileContactToggle = document.querySelector<HTMLButtonElement>(".mobile-contact-toggle");
+  const mobileContactLinks = document.querySelector<HTMLElement>("#mobile-contact-links");
+
+  const closeContactMenus = () => {
+    contactToggle?.setAttribute("aria-expanded", "false");
+    contactPopover?.classList.remove("is-open");
+    mobileContactToggle?.setAttribute("aria-expanded", "false");
+    mobileContactLinks?.classList.remove("is-open");
+  };
+
+  const setMenuState = (isOpen: boolean) => {
+    menuButton?.classList.toggle("is-open", isOpen);
+    mobileNavigation?.classList.toggle("is-open", isOpen);
+    menuButton?.setAttribute("aria-expanded", String(isOpen));
+    menuButton?.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+  };
+
+  menuButton?.addEventListener("click", () => {
+    const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+    setMenuState(!isOpen);
+  });
+
+  contactToggle?.addEventListener("click", () => {
+    const isOpen = contactToggle.getAttribute("aria-expanded") === "true";
+    contactToggle.setAttribute("aria-expanded", String(!isOpen));
+    contactPopover?.classList.toggle("is-open", !isOpen);
+  });
+
+  mobileContactToggle?.addEventListener("click", () => {
+    const isOpen = mobileContactToggle.getAttribute("aria-expanded") === "true";
+    mobileContactToggle.setAttribute("aria-expanded", String(!isOpen));
+    mobileContactLinks?.classList.toggle("is-open", !isOpen);
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    const target = event.target;
+    if (target instanceof Node && !target.closest(".contact-menu, .mobile-contact")) {
+      closeContactMenus();
+    }
+
+    if (
+      target instanceof Node &&
+      !target.closest(".menu-toggle, #mobile-navigation") &&
+      menuButton?.getAttribute("aria-expanded") === "true"
+    ) {
+      setMenuState(false);
+    }
+  });
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => setMenuState(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMenuState(false);
+      closeContactMenus();
+    }
+  });
+</script>
