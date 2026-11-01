@@ -4,21 +4,27 @@ import profilePhoto from "../assets/mifotoportafolio.webp";
 
 const projects = [
   {
-    title: "Página de restaurante",
-    description: "Sitio web responsive para un restaurante.",
-    url: "https://github.com/usuario/restaurante"
+    title: "Portafolio personal",
+    description:
+      "Sitio web personal para presentar mi perfil, formación, experiencia y conocimientos técnicos, con una interfaz responsive, navegación interactiva y una identidad visual orientada a sistemas y DevOps.",
+    url: "#inicio",
+    technologies: ["Astro", "Tailwind CSS", "HTML", "CSS", "JavaScript"]
   },
   {
     title: "Panel administrativo",
     description: "Dashboard para gestionar clientes.",
-    url: "https://github.com/usuario/dashboard"
+    url: "https://github.com/usuario/dashboard",
+    technologies: ["HTML", "CSS", "JavaScript"]
   },
   {
     title: "Panel administrativo",
     description: "Dashboard para gestionar clientes.",
-    url: "https://github.com/usuario/dashboard"
+    url: "https://github.com/usuario/dashboard",
+    technologies: ["HTML", "CSS", "JavaScript"]
   }
 ];
+
+const professionalExperience: Array<{ title: string; description: string }> = [];
 
 const studies = [
   {
@@ -214,7 +220,7 @@ const certifications = [
       <div class="mx-auto max-w-6xl">
         <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Trayectoria</p>
         <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Formación</h2>
-        <div class="mt-8 grid gap-8 md:grid-cols-2">
+        <div class="mt-8 grid gap-16 md:grid-cols-2">
           {studies.map((study) => (
             <article class="tilt-card group relative rounded-2xl border border-white/10 bg-slate-950/60 p-6" data-tilt>
               <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
@@ -239,23 +245,60 @@ const certifications = [
       </div>
     </section>
 
-    <section id="proyectos" class="px-6 py-20">
+    <section id="experiencia" class="px-6 py-20">
       <div class="mx-auto max-w-6xl">
-        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Trabajo seleccionado</p>
-        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Mis proyectos</h2>
-        <div class="mt-8 grid gap-8 md:grid-cols-2">
-          {projects.map((project) => (
-            <article class="tilt-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6" data-tilt>
-              <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-              <div class="relative">
-                <h3 class="text-xl font-semibold">{project.title}</h3>
-                <p class="mt-3 leading-7 text-slate-400">{project.description}</p>
-                <a href={project.url} class="mt-5 inline-block text-cyan-300 transition-colors hover:text-cyan-200">
-                  Ver proyecto <span aria-hidden="true">→</span>
-                </a>
+        <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300">Trayectoria</p>
+        <h2 class="mt-3 text-3xl font-bold sm:text-4xl">Experiencia</h2>
+
+        <div class="mt-10 space-y-12">
+          <div>
+            <h3 class="text-2xl font-semibold">Experiencia personal</h3>
+            <div class="mt-6 grid gap-16 md:grid-cols-2">
+              {projects.map((project) => (
+                <article class="tilt-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6" data-tilt>
+                  <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                  <div class="relative">
+                    <h4 class="text-xl font-semibold">{project.title}</h4>
+                    <p class="mt-3 leading-7 text-slate-400">{project.description}</p>
+                    <div class="mt-6">
+                      <h5 class="mb-3 text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Tecnologías</h5>
+                      <div class="flex flex-wrap gap-2">
+                        {project.technologies.map((technology) => (
+                          <span class="study-module rounded-full border border-white/10 px-3 py-1.5 text-xs text-slate-400">
+                            {technology}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <a href={project.url} class="mt-5 inline-block text-cyan-300 transition-colors hover:text-cyan-200">
+                      Ver proyecto <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-2xl font-semibold">Experiencia profesional</h3>
+            {professionalExperience.length > 0 ? (
+              <div class="mt-6 grid gap-16 md:grid-cols-2">
+                {professionalExperience.map((experience) => (
+                  <article class="tilt-card group relative rounded-2xl border border-white/10 bg-white/[0.03] p-6" data-tilt>
+                    <div class="tilt-shine pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                    <div class="relative">
+                      <h4 class="text-xl font-semibold">{experience.title}</h4>
+                      <p class="mt-3 leading-7 text-slate-400">{experience.description}</p>
+                    </div>
+                  </article>
+                ))}
               </div>
-            </article>
-          ))}
+            ) : (
+              <p class="mt-4 max-w-2xl leading-7 text-slate-400">
+                Próximamente añadiré aquí mi experiencia profesional y las responsabilidades desarrolladas en cada puesto.
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </section>
@@ -295,7 +338,7 @@ const certifications = [
           que estoy preparando.
         </p>
 
-        <div class="mt-10 grid gap-8 md:grid-cols-2">
+        <div class="mt-10 grid gap-16 md:grid-cols-2">
           {certifications.map((certification) => (
             <article
               class:list={[
