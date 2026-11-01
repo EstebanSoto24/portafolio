@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import profilePhoto from "../assets/mifotoportafolio.webp";
 
 const projects = [
   {
@@ -126,23 +127,29 @@ const certifications = [
 
 <Layout title="Esteban Soto Salguero | SysAdmin y DevOps">
   <main>
-    <section id="inicio" class="relative overflow-hidden border-b border-white/10 px-6 py-28 text-center sm:py-36">
+    <section id="inicio" class="relative overflow-hidden border-b border-white/10 px-6 pb-[5.25rem] pt-14 text-center sm:py-36">
       <div class="pointer-events-none absolute left-1/2 top-1/2 h-72 w-[min(90%,_58rem)] -translate-x-1/2 -translate-y-1/2 rounded-[45%] bg-cyan-400/10 blur-3xl"></div>
-      <div class="relative mx-auto max-w-3xl">
-        <p class="text-sm font-medium uppercase tracking-[0.3em] text-cyan-300">Hola, soy</p>
-        <h1 class="mt-5 whitespace-nowrap text-[clamp(1.65rem,8vw,4.5rem)] font-bold tracking-[-0.04em] text-white">
-          Esteban Soto Salguero<span class="text-cyan-300">.</span>
-        </h1>
-        <p class="mt-5 text-lg text-slate-300 sm:text-xl">
-          <span class="text-slate-400">Soy </span>
-          <span class="inline-flex items-baseline text-left font-medium text-cyan-300" aria-live="polite">
-            <span id="profession">Junior SysAdmin</span><span class="cursor-blink ml-0.5" aria-hidden="true">|</span>
-          </span>
-        </p>
-        <p class="mx-auto mt-6 max-w-xl leading-7 text-slate-400">
-          Me preparo para impulsar infraestructuras fiables, automatizar procesos y facilitar despliegues
-          seguros como Junior SysAdmin o Junior DevOps.
-        </p>
+      <div class="hero-intro relative mx-auto max-w-5xl">
+        <div class="hero-profile-photo" aria-hidden="true">
+          <span class="hero-profile-photo-glow"></span>
+          <img src={profilePhoto.src} alt="" width="270" height="270" />
+        </div>
+        <div class="hero-copy">
+          <p class="text-sm font-medium uppercase tracking-[0.3em] text-cyan-300">Hola, soy</p>
+          <h1 class="mt-5 whitespace-nowrap text-[clamp(1.05rem,8vw,4.5rem)] font-bold tracking-[-0.04em] text-white">
+            Esteban Soto Salguero<span class="text-cyan-300">.</span>
+          </h1>
+          <p class="mt-5 text-lg text-slate-300 sm:text-xl">
+            <span class="text-slate-400">Soy </span>
+            <span class="inline-flex items-baseline text-left font-medium text-cyan-300" aria-live="polite">
+              <span id="profession">Junior SysAdmin</span><span class="cursor-blink ml-0.5" aria-hidden="true">|</span>
+            </span>
+          </p>
+          <p class="mx-auto mt-6 max-w-xl leading-7 text-slate-400">
+            Me preparo para impulsar infraestructuras fiables, automatizar procesos y facilitar despliegues
+            seguros como Junior SysAdmin o Junior DevOps.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -373,6 +380,100 @@ const certifications = [
 </script>
 
 <style>
+  .hero-profile-photo {
+    position: relative;
+    display: grid;
+    width: 16.875rem;
+    height: 16.875rem;
+    margin: 0;
+    place-items: center;
+    border: 2px solid rgb(103 232 249 / 0.7);
+    border-radius: 9999px;
+    background: linear-gradient(135deg, rgb(103 232 249 / 0.95), rgb(129 140 248 / 0.85) 48%, rgb(217 70 239 / 0.8));
+    box-shadow:
+      0 0 0 6px rgb(8 47 73 / 0.7),
+      0 0 2.5rem rgb(34 211 238 / 0.35);
+    isolation: isolate;
+    overflow: hidden;
+    animation: hero-profile-float 5s ease-in-out infinite;
+  }
+
+  .hero-profile-photo img {
+    position: relative;
+    z-index: 1;
+    width: 108%;
+    height: 108%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+    transform: translateY(-8%);
+  }
+
+  .hero-profile-photo-glow {
+    position: absolute;
+    inset: -1rem;
+    z-index: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgb(34 211 238 / 0.5), rgb(217 70 239 / 0.4));
+    filter: blur(1rem);
+  }
+
+  .hero-intro {
+    display: grid;
+    grid-template-columns: 16.875rem minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    text-align: left;
+  }
+
+  .hero-copy {
+    min-width: 0;
+  }
+
+  .hero-copy .max-w-xl {
+    margin-left: 0;
+  }
+
+  @media (max-width: 767px) {
+    .hero-intro {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      text-align: center;
+    }
+
+    .hero-profile-photo {
+      width: min(16.875rem, 75vw);
+      height: min(16.875rem, 75vw);
+      margin: 0 auto;
+    }
+
+    .hero-copy {
+      width: 100%;
+    }
+
+    .hero-copy .max-w-xl {
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+
+  @keyframes hero-profile-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-1deg);
+    }
+
+    50% {
+      transform: translateY(-6px) rotate(1deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-profile-photo {
+      animation: none;
+    }
+  }
+
   .tilt-card {
     transform: perspective(900px) rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
     transform-style: preserve-3d;
