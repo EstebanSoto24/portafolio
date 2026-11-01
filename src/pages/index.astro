@@ -446,14 +446,25 @@ const certifications = [
                   </div>
                 </div>
 
-                <a
-                  href={certification.pdf}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-200"
-                >
-                  Ver certificación PDF <span class="ml-2" aria-hidden="true">↗</span>
-                </a>
+                {certification.progress === 100 ? (
+                  <a
+                    href={certification.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-6 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300 transition-colors hover:border-cyan-300/40 hover:bg-cyan-300/10 hover:text-cyan-200"
+                  >
+                    Ver certificación PDF <span class="ml-2" aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    disabled
+                    class="mt-6 inline-flex cursor-not-allowed items-center rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 text-sm text-slate-600"
+                    aria-label={`Certificación de ${certification.title} no disponible`}
+                  >
+                    Certificación no disponible
+                  </button>
+                )}
               </div>
             </article>
           ))}
