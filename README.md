@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Astro Starter Kit: Basics
 
 ```sh
@@ -44,3 +45,54 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+=======
+# Portafolio
+In this repository I upload all the process and the code that my portfolio needs to work.
+
+## Structure
+
+**Presentación**
+
+Nombre
+Profesión o especialidad
+Descripción breve
+Botón para contactar o descargar el CV
+Sobre mí
+
+---
+**Experiencia**
+
+Formación
+Intereses profesionales
+
+---
+**Tecnologías**
+
+HTML, CSS, JavaScript
+Astro
+Tailwind CSS
+React, Vue, Node.js u otras tecnologías que utilices
+
+---
+**Proyectos**
+
+Nombre
+Descripción
+Tecnologías utilizadas
+Enlace al repositorio
+Enlace a la demo
+
+---
+**Contacto**
+
+Email
+GitHub
+LinkedIn
+Formulario opcional
+
+---
+**Footer**
+
+Copyright
+Enlaces sociales
+>>>>>>> 97c1e74da8847ee183848d20e678ded7251ab644
